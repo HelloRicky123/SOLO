@@ -122,6 +122,8 @@ class SOLOv2Head(nn.Module):
         normal_init(self.solo_kernel, std=0.01)
 
     def forward(self, feats, eval=False):
+        from IPython import embed
+        embed()
         new_feats = self.split_feats(feats)
         featmap_sizes = [featmap.size()[-2:] for featmap in new_feats]
         upsampled_size = (featmap_sizes[0][0] * 2, featmap_sizes[0][1] * 2)

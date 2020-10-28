@@ -3,7 +3,7 @@ from .single_stage_ins import SingleStageInsDetector
 
 
 @DETECTORS.register_module
-class SOLO(SingleStageInsDetector):
+class SOLO9point(SingleStageInsDetector):
 
     def __init__(self,
                  backbone,
@@ -12,5 +12,5 @@ class SOLO(SingleStageInsDetector):
                  train_cfg=None,
                  test_cfg=None,
                  pretrained=None):
-        super(SOLO, self).__init__(backbone, neck, bbox_head, None, train_cfg,
+        super(SOLO9point, self).__init__(backbone, neck, bbox_head, None, train_cfg,
                                    test_cfg, pretrained)
