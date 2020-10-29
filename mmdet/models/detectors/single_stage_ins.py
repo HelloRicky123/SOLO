@@ -67,6 +67,7 @@ class SingleStageInsDetector(BaseDetector):
         x = self.extract_feat(img)
         outs = self.bbox_head(x)
 
+        # 这里表示是solov2，要用kernel 卷积
         if self.with_mask_feat_head:
             mask_feat_pred = self.mask_feat_head(
                 x[self.mask_feat_head.

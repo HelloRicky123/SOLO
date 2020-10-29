@@ -15,6 +15,7 @@ from .rpn_head import RPNHead
 from .solo9point_head import SOLO9pointHead
 from .solo_head import SOLOHead
 from .solov2_head import SOLOv2Head
+from .solov2_9point_head import SOLOv2_9point_Head
 from .solov2_light_head import SOLOv2LightHead
 from .ssd_head import SSDHead
 
@@ -22,5 +23,5 @@ __all__ = [
     'AnchorHead', 'GuidedAnchorHead', 'FeatureAdaption', 'RPNHead',
     'GARPNHead', 'RetinaHead', 'RetinaSepBNHead', 'GARetinaHead', 'SSDHead',
     'FCOSHead', 'RepPointsHead', 'FoveaHead', 'FreeAnchorRetinaHead',
-    'ATSSHead', 'SOLOHead', 'SOLOv2Head', 'SOLOv2LightHead', 'DecoupledSOLOHead', 'DecoupledSOLOLightHead','SOLO9pointHead'
+    'ATSSHead', 'SOLOHead', 'SOLOv2Head', 'SOLOv2LightHead', 'DecoupledSOLOHead', 'DecoupledSOLOLightHead','SOLO9pointHead', 'SOLOv2_9point_Head'
 ]

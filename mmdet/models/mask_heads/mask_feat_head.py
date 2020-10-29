@@ -32,6 +32,12 @@ class MaskFeatHead(nn.Module):
         self.norm_cfg = norm_cfg
 
         self.convs_all_levels = nn.ModuleList()
+        # 每个fpn level 都有不同的卷积
+        # 一共是 0，1，2，3 共四层
+        # 第0层 256 到 128 一个 卷积
+        # 第1层 不加坐标，一个卷积，一个上采样
+        # 其后每层多加一个卷积和上采样
+        # 第3层增加坐标
         for i in range(self.start_level, self.end_level + 1):
             convs_per_level = nn.Sequential()
             if i == 0:
@@ -82,6 +88,7 @@ class MaskFeatHead(nn.Module):
 
             self.convs_all_levels.append(convs_per_level)
 
+        # 输出channel为类别
         self.conv_pred = nn.Sequential(
             ConvModule(
                 self.out_channels,
@@ -100,6 +107,8 @@ class MaskFeatHead(nn.Module):
     def forward(self, inputs):
         assert len(inputs) == (self.end_level - self.start_level + 1)
 
+        # 经过不同层的卷积，都直接相加，而不是cat再卷积
+        # 128,200,296
         feature_add_all_level = self.convs_all_levels[0](inputs[0])
         for i in range(1, len(inputs)):
             input_p = inputs[i]
@@ -114,6 +123,6 @@ class MaskFeatHead(nn.Module):
                 input_p = torch.cat([input_p, coord_feat], 1)
                 
             feature_add_all_level += self.convs_all_levels[i](input_p)
-
+        # 最后再混合卷积到256
         feature_pred = self.conv_pred(feature_add_all_level)
         return feature_pred

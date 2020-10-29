@@ -31,7 +31,7 @@ def dice_loss(input, target):
     return 1-d
 
 @HEADS.register_module
-class SOLOv2Head(nn.Module):
+class SOLOv2_9point_Head(nn.Module):
 
     def __init__(self,
                  num_classes,
@@ -50,7 +50,7 @@ class SOLOv2Head(nn.Module):
                  norm_cfg=None,
                  use_dcn_in_tower=False,
                  type_dcn=None):
-        super(SOLOv2Head, self).__init__()
+        super(SOLOv2_9point_Head, self).__init__()
         self.num_classes = num_classes
         self.seg_num_grids = num_grids
         self.cate_out_channels = self.num_classes - 1
